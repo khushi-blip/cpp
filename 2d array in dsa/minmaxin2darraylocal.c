@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void createarr(int rows, int column, int arr[100][100]) {
+int createarr(int rows, int column, int arr[100][100]) {
     printf("Enter elements of %d rows and %d columns:\n", rows, column);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < column; j++) {
@@ -40,7 +40,30 @@ void printarr(int rows, int column, int arr[100][100]) {
         printf("\n");
     }
 }
+void updatearray(int rows,int column,int arr[100][100]){
+    int rowpos,colpos;
+  printf("enter row position");
+  scanf("%d",&rowpos);
+  if(rowpos>rows||rowpos<0){
+    printf("invalid");
+  }
+  else{
+    printf("enter position of column in row %d",rowpos);
+    scanf("%d",&colpos);
+    if(colpos>column || colpos<0){
+      printf("invalid");
+    }
+    else{
+      printf("enter value to update");
+      int value;
+      scanf("%d",&value);
+    
+    arr[rowpos-1][colpos-1]=value;
+    printf("value updates successfully");
 
+  }
+}
+} 
 int main() {
     int arr[100][100];
     int rows, column;
@@ -49,7 +72,7 @@ int main() {
     scanf("%d", &rows);
     printf("Enter no. of columns: ");
     scanf("%d", &column);
-
+    
     createarr(rows, column, arr);
     printarr(rows, column, arr);
     int max=maxno(arr,rows,column);
@@ -57,5 +80,10 @@ int main() {
     int min=minno(arr,rows,column);
     printf("minimun element is %d\n",min);
 
-    return 0;
+   
+
+    updatearray(rows,column,arr);
+    printarr(rows,column,arr);
+
+    
 }
