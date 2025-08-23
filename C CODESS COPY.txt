@@ -1,0 +1,241 @@
+Q: WRITE UDF TO PRINT LENTGH OF STRING
+#include<stdio.h>
+int xstrlen(char*);
+int main()
+{
+  char arr[]="hello";
+  char bye[]="bye";
+  int len1,len2;
+  len1= xstrlen(arr);
+  len2= xstrlen(bye);
+  printf("string =%s length =%d\n",arr,len1);
+  printf("string =%s length =%d\n",bye,len2);
+  return 0;
+}
+int xstrlen(char *s)
+{
+  int length =0;
+  while(*s!='\0'){
+    length ++;
+    s++;
+  }
+  return(length);
+}
+
+
+
+
+
+OR
+
+
+
+
+
+
+
+#include<stdio.h>
+int xstrlen(char*);
+int main()
+{
+  char arr[]="hello";
+  
+  int len1,len2;
+  len1= xstrlen(arr);
+  len2= xstrlen("bye");
+  printf("string =%s length =%d\n",arr,len1);
+  printf("string =%s length =%d\n","bye",len2);
+  return 0;
+}
+int xstrlen(char *s)
+{
+  int length =0;
+  while(*s!='\0'){
+    length ++;
+    s++;
+  }
+  return(length);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q: FOR UPPER CASE
+
+#include<stdio.h>
+
+void strupr(char *s) {
+    int i = 0;
+    while (s[i] != '\0') { 
+        if (s[i] >= 97 && s[i] <= 122) {  
+            s[i] = s[i] - 32; 
+        }
+        i++;
+    }
+}
+int main() {
+    char ch[] = "hello";  
+    printf("Original string is = %s\n", ch);
+    
+    strupr(ch);  
+    
+    printf("String is upper case = %s\n", ch);  
+    
+    return 0;
+
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q: FOR LOWER CASE
+#include<stdio.h>
+
+void strlwr(char *s) {
+    int i = 0;
+    while (s[i] != '\0') { 
+        if (s[i] >= 'A' && s[i] <= 'Z') {  
+            s[i] = s[i] +32; 
+        }
+        i++;
+    }
+}
+int main() {
+    char ch[] = "HELLO";  
+    printf("Original string is = %s\n", ch);
+    
+    strlwr(ch);  
+    
+    printf("String is upper case = %s\n", ch);  
+    
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Qswap
+
+#include <stdio.h>
+void swap(int *,int*);
+int main ()
+{
+    
+    int a,b;
+    printf("enter value of a and b\n");
+    scanf("%d %d",&a,&b);
+    swap(&a,&b);
+    printf("%d %d",a,b);
+}int temp;
+void swap(int *x, int *y) {
+     temp = *x;  
+    *x = *y;
+    *y = temp; 
+}----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q STRUCTURE
+
+
+
+
+#include<stdio.h>
+int main()
+{
+    struct employee{
+        char name;
+        int salary;
+        int id;
+    };
+    struct employee khushi;
+    khushi.name= 30;
+    khushi.salary=100;
+    khushi.id=321;
+    printf("%d %d %d",khushi.name,khushi.salary,khushi.id);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q: both uppercase and lowercase
+#include<stdio.h>
+
+void strlwr(char *s) {
+    int i = 0;
+    while (s[i] != '\0') { 
+        if (s[i] >= 'A' && s[i] <= 'Z') {  
+            s[i] = s[i] +32; 
+        }
+        i++;}
+}
+        
+
+void strupr(char *s) {
+    int i = 0;
+    while (s[i] != '\0') { 
+        if (s[i] >= 97 && s[i] <= 122) {  
+            s[i] = s[i] - 32; 
+        }
+        i++;
+    }
+}
+        int main() {
+    char ch[] = "hello";  
+    printf("Original string is = %s\n", ch);
+    
+    strupr(ch);  
+    
+    printf("String is upper case = %s\n", ch);  
+    
+    return 0;
+        }
+    
+        
+

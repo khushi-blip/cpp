@@ -1,0 +1,4 @@
+//write an algorithm to find the given no from the user is palindrome or not
+1:start
+2:read from user
+3:

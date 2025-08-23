@@ -1,0 +1,3 @@
+the range of int constant is -2147483648 to +2147483647
+the range depends on the compiler compilers like visual studio  code have this range 
+but in turbo c it is -32768 to +32767

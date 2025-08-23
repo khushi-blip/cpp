@@ -1,0 +1,40 @@
+
+C Program to Swap First and Last Column of a Matrix
+
+
+
+
+#include <stdio.h>
+
+void swapColumns(int arr[][10], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        int temp = arr[i][0];
+        arr[i][0] = arr[i][cols - 1];
+        arr[i][cols - 1] = temp;
+    }
+}
+
+int main() {
+    int m, n;
+    printf("Enter the number of rows and columns: ");
+    scanf("%d %d", &m, &n);
+    
+    int matrix[10][10];
+    printf("Enter the elements of the matrix:\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    swapColumns(matrix, m, n);
+
+    printf("Modified matrix:\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}

@@ -1,0 +1,199 @@
+UNIT 01 
+
+Q3. Describe the functionality of the strlen() function from the <string.h> header file and provide an example of how it 
+can be used to determine the length of a null-terminated string. 
+
+Q4. How can you compare two strings in C using the strcmp() function, and what do the return values of this function 
+indicate about the relationship between the strings? 
+
+Q5. Write a C program that uses the strstr() function to find a substring within a larger string and explain how it 
+handles cases where the substring is not found. 
+
+Q6. What is the purpose of the strtok() function in tokenizing a string, and how can it be used to split a sentence into 
+individual words based on a delimiter like a space? 
+
+Q7. Explain how pointers are used in string manipulation in C, particularly when passing strings to functions or 
+modifying strings dynamically. 
+
+Q8. Describe the atoi() function and provide an example of how it can be used to convert a string of digits into an 
+integer, including error handling for invalid inputs. 
+
+Q9. How does the strcpy() function from <string.h> differ from strncpy(), and in what scenarios would you prefer to 
+use one over the other to copy strings? 
+
+Q10. Demonstrate how to concatenate two strings using the strcat() function and explain the potential risks of buffer 
+overflow when performing this operation.   
+
+
+
+
+ANSWERS
+
+Q1. How would you declare and initialize a string in C using both a character array and a pointer, and what are the key 
+differences between these two approaches? 
+
+ANS 1:Using a character array:
+
+char str1[] = "Hello";
+
+
+Using a pointer:------
+
+char *str2 = "Hello";
+
+Key Differences:
+
+(1) str1 is a modifiable array stored in stack memory.
+
+(2) str2 points to a string literal, typically stored in read-only memory (modifying it causes undefined behavior).
+
+(3) Arrays allocate memory and copy the string, while pointers only reference the existing literal.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q2. Explain the role of the null terminator in a C string and how it impacts string manipulation when using standard 
+library functions from <string.h>. 
+
+ANS2: The null terminator ('\0') marks the end of a string in C. It is critical because functions like strlen(), strcpy(), and strcat() use it to determine where the string ends. If a string is not null-terminated, these functions may read past the intended boundary, leading to undefined behavior or security risks.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q3. Describe the functionality of the strlen() function from the <string.h> header file and provide an example.
+
+ANS3:
+The strlen() function calculates the number of characters in a null-terminated string excluding the null character.
+
+Example:
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "ChatGPT";
+    printf("Length = %lu\n", strlen(str));  // Output: 7
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q4. How can you compare two strings in C using the strcmp() function, and what do the return values mean?
+
+ANS4: The strcmp(s1, s2) function compares two strings lexicographically:
+
+Returns 0 if s1 == s2
+
+Returns < 0 if s1 < s2
+
+Returns > 0 if s1 > s2
+
+Example:
+strcmp("apple", "banana");  // Returns negative value
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q5. Write a C program using strstr() and explain substring not found case.
+ANS5:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char text[] = "C programming is powerful";
+    char *substr = strstr(text, "programming");
+
+    if (substr) {
+        printf("Found: %s\n", substr);
+    } else {
+        printf("Substring not found.\n");
+    }
+    return 0;
+}
+
+Explanation:
+
+If found, strstr() returns a pointer to the first occurrence.
+
+If not found, it returns NULL.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q6. What is the purpose of strtok() and how is it used to split a sentence?
+ANS 6:
+The strtok() function tokenizes a string into parts based on delimiters.
+
+Example (splitting by space):
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "C is fun to learn";
+    char *token = strtok(str, " ");
+
+    while (token != NULL) {
+        printf("%s\n", token);
+        token = strtok(NULL, " ");
+    }
+    return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q7. How are pointers used in string manipulation in C?
+
+ANS7:
+Strings are arrays of characters, and arrays decay to pointers.
+
+Functions often receive strings as char * or const char *.
+
+Pointers enable dynamic memory allocation and efficient traversal.
+
+Example:
+
+void printString(char *s) {
+    while (*s) {
+        putchar(*s++);
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q8. Describe atoi() with example and error handling.
+ANS8:
+The atoi() function converts a numeric string to an integer.
+
+Example:
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char numStr[] = "1234";
+    int num = atoi(numStr);
+    printf("%d\n", num);  // Output: 1234
+    return 0;
+}
+Note: atoi() does not handle errors well. Use strtol() for robust error handling.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q9. Difference between strcpy() and strncpy() and when to use each.
+ANS9--
+strcpy(dest, src) copies entire src (assumes null-terminated).
+
+strncpy(dest, src, n) copies up to n chars; if no '\0' in first n, dest is not null-terminated.
+
+Prefer strncpy():
+
+When buffer overflow protection is needed.
+
+When copying into a fixed-length buffer.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+10. Demonstrate strcat() and explain buffer overflow risk.
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[20] = "Hello, ";
+    char str2[] = "World!";
+    strcat(str1, str2);
+    printf("%s\n", str1);  // Output: Hello, World!
+    return 0;
+}
+
+Risk:
+
+If str1 doesn’t have enough space, strcat() may cause buffer overflow.
+
+Always ensure destination buffer size > combined string length + 1 (for '\0').
+

@@ -1,0 +1,22 @@
+There are two main ways to use #include:
+
+#include <filename.h>: This form is used for standard library header files. The preprocessor searches for these files in system-defined directories.
+Example: #include <stdio.h> (for standard input/output functions like printf and scanf).
+#include "filename.h": This form is used for user-defined header files. The preprocessor first searches for these files in the same directory as your source code.
+Example: #include "myheader.h" (if you have created a header file named myheader.h).
+
+
+
+
+
+
+
+
+
+
+
+
+a[0] is 10 (even), so sum becomes 10.
+a[1] is 32 (even), so sum becomes 10 + 32 = 42.
+a[2] is 13 (odd), so it's skipped.
+a[3] is 42 (even), so sum becomes 42 + 42 = 84.

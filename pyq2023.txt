@@ -1,0 +1,96 @@
+Q. Illustrate with a fragment of C code and explain the compile time and runtime initialization of 1-D and 2-D character arrays.
+✅ Introduction:
+
+In C, character arrays are used to store strings. These arrays can be either:
+
+One-Dimensional (1-D): For storing single strings.
+
+Two-Dimensional (2-D): For storing multiple strings (like an array of strings).
+
+Initialization can be done in two ways:
+
+Compile-Time Initialization – During code writing.
+
+Runtime Initialization – During program execution (user input).
+
+🔹 1. One-Dimensional (1-D) Character Arrays
+➤ Compile-Time Initialization:
+This is done at the time of variable declaration. The compiler assigns memory and values.
+
+c
+Copy
+Edit
+char str1[] = "Hello";  // Implicitly ends with '\0'
+char str2[6] = {'H', 'e', 'l', 'l', 'o', '\0'};  // Explicit
+🔍 Explanation:
+str1[] = "Hello" automatically includes the null character \0 at the end.
+
+The array size is calculated as 6 (5 characters + 1 null character).
+
+Values are fixed and cannot be changed unless modified later.
+
+➤ Runtime Initialization:
+Takes input from the user during execution.
+
+c
+Copy
+Edit
+char str[100];
+printf("Enter a string: ");
+scanf("%s", str);
+🔍 Explanation:
+The user types a string, which gets stored in the array str.
+
+The input is stored without spaces (because scanf("%s",...) reads till space).
+
+Memory is dynamically filled at runtime based on user input.
+
+🔹 2. Two-Dimensional (2-D) Character Arrays
+➤ Compile-Time Initialization:
+Used to store a list of strings.
+
+c
+Copy
+Edit
+char names[3][10] = {"Alice", "Bob", "Carol"};
+🔍 Explanation:
+Declares an array of 3 strings, each of max 9 characters + 1 null.
+
+Memory is allocated at compile time.
+
+Each string is stored in a row of the 2D array.
+
+Visual Layout in Memory:
+
+arduino
+Copy
+Edit
+names[0] = "Alice"
+names[1] = "Bob"
+names[2] = "Carol"
+➤ Runtime Initialization:
+Takes multiple strings from user input.
+
+c
+Copy
+Edit
+char names[3][10];
+for(int i = 0; i < 3; i++) {
+    printf("Enter name %d: ", i+1);
+    scanf("%s", names[i]);
+}
+🔍 Explanation:
+User inputs names at runtime.
+
+Input is stored row-wise in the 2D array.
+
+Allows flexibility for different values on each program run.
+
+✅ Key Differences: Compile-Time vs Runtime Initialization
+Feature	Compile-Time Initialization	Runtime Initialization
+When happens	During compilation	During program execution
+Who sets the values	Programmer	User or system during execution
+Flexibility	Less flexible	More flexible (different values each time)
+Error-prone	Less (checked at compile time)	More (e.g., buffer overflow, invalid input)
+Common use cases	Fixed strings, default values	User input, dynamic behavior
+

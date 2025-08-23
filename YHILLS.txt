@@ -1,0 +1,7 @@
+python yhills class
+
+
+print("hello evyerone")
+>>> hello evyerone
+
+# this means comment

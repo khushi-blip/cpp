@@ -1,0 +1,304 @@
+UNIT 03 
+Q1. Explain the process of opening and closing a file in C programming, including the role of the FILE pointer and the 
+significance of using fclose() to prevent resource leaks
+. 
+Q2. Describe the different file modes available in C (e.g., "r", "w", "a", "rb", "wb") and provide examples of when each 
+mode is most appropriately used. 
+
+Q3. Compare and contrast the use of getc() and fgets() for reading data from a text file, highlighting their advantages 
+and limitations in handling input. 
+
+Q4. How do the functions putc() and fputs() differ in writing data to a text file? Provide a practical example 
+demonstrating the use of each function. 
+
+
+Q5. What is the key difference between append mode ("a") and write mode ("w") when opening a file? Illustrate with a 
+scenario where append mode is preferable. 
+
+Q6. Describe the process of reading and writing data in a binary file using fread() and fwrite(). Provide an example of 
+storing and retrieving a structure in a binary file. 
+
+Q7. How can you count the number of lines in a text file using C? Write a sample code snippet that demonstrates this 
+process using fgets() or getc(). 
+
+Q8. Explain how to search for a specific string in a text file using C. Include a code example that reads the file line by 
+line and checks for the presence of the search term. 
+
+Q9. Discuss the role of random file accessing methods like fseek(), ftell(), and rewind() in navigating a file. Provide an 
+example where fseek() is used to modify a specific record in a file. 
+
+Q10. What is the purpose of the feof() function in file handling, and how should it be used correctly to avoid common 
+pitfalls when reading a file until the end? 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+ANSWERS
+
+
+Q1. Opening and Closing a File in C
+In C, files are opened using the fopen() function and closed using fclose(). File operations are performed using a pointer of type FILE *.
+
+Syntax:
+FILE *fp;
+fp = fopen("filename.txt", "mode");
+FILE *fp is a file pointer used to access the file.
+
+"mode" specifies how the file is to be opened.
+
+To prevent resource leaks, always close files using fclose(fp); after operations are complete. This ensures data is saved properly and frees up system resources.
+
+Example:
+
+FILE *fp = fopen("data.txt", "r");
+if (fp != NULL) {
+    // file operations
+    fclose(fp);
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Q2. File Modes in C
+Mode	Description	Example Usage
+"r"	Read-only. File must exist.	Reading a configuration file.
+"w"	Write-only. Overwrites file if it exists.	Logging data (old data discarded).
+"a"	Append. Writes to end of file.	Adding new entries to a log file.
+"rb"	Read binary.	Reading a binary image or structure file.
+"wb"	Write binary.	Writing structure data in binary format.
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q3. getc() vs fgets()
+Function	Description	Pros	Cons
+getc()	Reads a single character.	Simple, useful for character-wise read	Cannot read whole lines.
+fgets()	Reads a string/line from file.	Can read full lines with spaces	Must manage buffer size to avoid overflows
+
+Example:
+c
+Copy
+Edit
+char c;
+FILE *fp = fopen("text.txt", "r");
+while ((c = getc(fp)) != EOF)
+    putchar(c);
+fclose(fp);
+c
+Copy
+Edit
+char line[100];
+FILE *fp = fopen("text.txt", "r");
+while (fgets(line, sizeof(line), fp))
+    printf("%s", line);
+fclose(fp);
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q4. putc() vs fputs()
+Function	Usage
+putc()	Writes a single character
+fputs()	Writes a full string
+
+Example:
+c
+Copy
+Edit
+FILE *fp = fopen("example.txt", "w");
+putc('A', fp);              // Writes 'A'
+fputs("Hello World", fp);   // Writes the full string
+fclose(fp);
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q5. Append Mode ("a") vs Write Mode ("w")
+"w" erases the file before writing.
+
+"a" keeps existing data and adds new content at the end.
+
+Scenario for Append:
+Adding new transactions to an existing log:
+
+c
+Copy
+Edit
+FILE *fp = fopen("log.txt", "a");
+fputs("New transaction\n", fp);
+fclose(fp);
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q6. Reading/Writing Binary Files: fread() & fwrite()
+Used for reading and writing data in binary format (efficient for structures).
+
+Example:
+c
+Copy
+Edit
+struct Student {
+    int id;
+    char name[20];
+};
+
+struct Student s = {1, "Alice"};
+FILE *fp = fopen("student.dat", "wb");
+fwrite(&s, sizeof(s), 1, fp);
+fclose(fp);
+
+// Reading back
+struct Student r;
+fp = fopen("student.dat", "rb");
+fread(&r, sizeof(r), 1, fp);
+printf("%d %s\n", r.id, r.name);
+fclose(fp);
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q7. Count Lines in a Text File
+Using fgets() or getc():
+c
+Copy
+Edit
+int count = 0;
+char ch;
+FILE *fp = fopen("text.txt", "r");
+while ((ch = getc(fp)) != EOF) {
+    if (ch == '\n')
+        count++;
+}
+fclose(fp);
+printf("Total lines: %d\n", count);
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Q8. Search for a Specific String in a Text File
+Code Example:
+c
+Copy
+Edit
+char line[256];
+char keyword[] = "hello";
+FILE *fp = fopen("file.txt", "r");
+
+while (fgets(line, sizeof(line), fp)) {
+    if (strstr(line, keyword)) {
+        printf("Found: %s", line);
+    }
+}
+fclose(fp);
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+Q9. Random Access: fseek(), ftell(), rewind()
+fseek(): Move file pointer to a specific location.
+
+ftell(): Returns current position.
+
+rewind(): Moves pointer to start.
+
+Example – Modify a Record:
+c
+Copy
+Edit
+struct Student {
+    int id;
+    char name[20];
+};
+
+FILE *fp = fopen("student.dat", "rb+");
+fseek(fp, sizeof(struct Student) * 1, SEEK_SET); // Move to 2nd record
+struct Student s = {2, "Bob"};
+fwrite(&s, sizeof(s), 1, fp);
+fclose(fp);
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+10. feof() – End of File Check
+Used to detect end of file. But be careful — feof() only becomes true after an attempt to read past EOF.
+
+Correct Usage:
+c
+Copy
+Edit
+FILE *fp = fopen("file.txt", "r");
+char line[100];
+while (fgets(line, sizeof(line), fp) != NULL) {
+    printf("%s", line);
+}
+fclose(fp);
+❌ Wrong:
+
+c
+Copy
+Edit
+while (!feof(fp)) {
+    fgets(line, sizeof(line), fp); // May cause duplicate last line
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
